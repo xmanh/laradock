@@ -40,11 +40,19 @@ RUN set -xe; \
       # base image (https://github.com/Laradock/php-fpm).
       #
       # next lines are here becase there is no auto build on dockerhub see https://github.com/laradock/laradock/pull/1903#issuecomment-463142846
+      libmcrypt-dev \
       libzip-dev zip unzip && \
       docker-php-ext-configure zip --with-libzip && \
       # Install the zip extension
       docker-php-ext-install zip && \
       php -m | grep -q 'zip'
+
+# Install the PHP mcrypt extention
+RUN if [ ${LARADOCK_PHP_VERSION} != "5.6" ] && [ ${LARADOCK_PHP_VERSION} != "7.1" ] ; then \
+    apt-get update && apt-get install -y libmcrypt-dev \
+    && pecl install mcrypt-1.0.2 \
+    && echo "extension=$(php -r "echo ini_get('extension_dir');")/mcrypt.so" >  $PHP_INI_DIR/conf.d/mcrypt.ini \
+;fi
 
 #
 #--------------------------------------------------------------------------

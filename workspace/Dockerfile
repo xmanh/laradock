@@ -63,6 +63,13 @@ RUN set -xe; \
       nasm && \
       php -m | grep -q 'zip'
 
+# Install the PHP mcrypt extention
+RUN if [ ${LARADOCK_PHP_VERSION} != "5.6" ] && [ ${LARADOCK_PHP_VERSION} != "7.1" ] ; then \
+    apt-get update && apt-get install -y libmcrypt-dev \
+    && pecl install mcrypt-1.0.2 \
+    && echo "extension=/usr/lib/php/20170718/mcrypt.so" > /etc/php/${LARADOCK_PHP_VERSION}/mods-available/mcrypt.ini \
+;fi
+
 #
 #--------------------------------------------------------------------------
 # Optional Software's Installation
