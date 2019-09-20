@@ -126,6 +126,7 @@ services:
           - no_proxy
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+        - ./php-fpm/conf.d/upload.ini:/etc/php/${PHP_VERSION}/cli/conf.d/upload.ini
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       ports:
@@ -195,6 +196,7 @@ services:
           - no_proxy
       volumes:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
+        - ./php-fpm/conf.d/upload.ini:/usr/local/etc/php/conf.d/upload.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
       expose:
         - "9000"
@@ -267,6 +269,7 @@ services:
           - no_proxy
       volumes:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
+        - ./php-fpm/conf.d/upload.ini:/usr/local/etc/php/conf.d/upload.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
       expose:
         - "9000"
