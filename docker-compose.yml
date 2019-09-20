@@ -731,6 +731,8 @@ services:
 ### phpMyAdmin ###########################################
     phpmyadmin:
       build: ./phpmyadmin
+      volumes: 
+        - ./php-fpm/conf.d/upload.ini:/usr/local/etc/php/conf.d/upload.ini
       environment:
         - PMA_ARBITRARY=1
         - MYSQL_USER=${PMA_USER}
