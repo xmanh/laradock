@@ -444,6 +444,18 @@ RUN if [ ${INSTALL_CASSANDRA} = true ]; then \
 ;fi
 
 ###########################################################################
+# Gearman:
+###########################################################################
+
+ARG INSTALL_GEARMAN=false
+
+RUN if [ ${INSTALL_GEARMAN} = true ]; then \
+    add-apt-repository -y ppa:ondrej/pkg-gearman && \
+    apt-get update && \
+    apt-get install php-gearman -y  \
+;fi
+
+###########################################################################
 # PHP REDIS EXTENSION
 ###########################################################################
 
@@ -1092,6 +1104,16 @@ ARG INSTALL_FFMPEG=false
 
 RUN if [ ${INSTALL_FFMPEG} = true ]; then \
   apt-get -y install ffmpeg \
+;fi
+
+###########################################################################
+# Mailparse extension:
+###########################################################################
+
+ARG INSTALL_MAILPARSE=false
+
+RUN if [ ${INSTALL_MAILPARSE} = true ]; then \
+    apt-get install -yqq php-mailparse \
 ;fi
 
 ###########################################################################
