@@ -580,19 +580,6 @@ services:
       networks:
         - backend
 
-### MongoDB 3.4 ##############################################
-    mongo34:
-      build:
-        context: ./mongo
-        args:
-          - MONGODB_VERSION=3.4
-      ports:
-        - "27034:27017"
-      volumes:
-        - ${DATA_PATH_HOST}/mongo34:/data/db
-      networks:
-        - backend
-
 ### RethinkDB ##############################################
     rethinkdb:
       build: ./rethinkdb
