@@ -439,7 +439,7 @@ RETHINKDB_PORT=8090
 
 ### MONGODB ###############################################
 
-MONGODB_VERSION=3.4
+MONGODB_VERSION=latest
 MONGODB_PORT=27017
 
 ### CADDY #################################################
