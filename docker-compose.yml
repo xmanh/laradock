@@ -268,7 +268,7 @@ services:
           - https_proxy
           - no_proxy
       volumes:
-        - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
+        - ./php-fpm/php5.6.ini:/usr/local/etc/php/php.ini
         - ./php-fpm/conf.d/upload.ini:/usr/local/etc/php/conf.d/upload.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
       expose:
@@ -560,13 +560,27 @@ services:
 
 ### MongoDB ##############################################
     mongo:
-      build: ./mongo
+      build:
+        context: ./mongo
+        args:
+          - MONGODB_VERSION=${MONGODB_VERSION}
       ports:
         - "${MONGODB_PORT}:27017"
-      environment:
-        - MONGODB_VERSION=${MONGODB_VERSION}
       volumes:
         - ${DATA_PATH_HOST}/mongo:/data/db
+      networks:
+        - backend
+
+### MongoDB 3.4 ##############################################
+    mongo34:
+      build:
+        context: ./mongo
+        args:
+          - MONGODB_VERSION=3.4
+      ports:
+        - "27034:27017"
+      volumes:
+        - ${DATA_PATH_HOST}/mongo34:/data/db
       networks:
         - backend
 
