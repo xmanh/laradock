@@ -440,7 +440,7 @@ RETHINKDB_PORT=8090
 ### MONGODB ###############################################
 
 # for Windows use 'mongo'
-# for Linux use '~/.laradock/data/mongo'
+# for Linux   use '~/.laradock/data/mongo'
 MONGODB_VOLUMES=~/.laradock/data/mongo
 MONGODB_VERSION=latest
 MONGODB_PORT=27017
