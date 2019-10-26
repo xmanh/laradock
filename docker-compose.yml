@@ -576,10 +576,7 @@ services:
       ports:
         - "${MONGODB_PORT}:27017"
       volumes:
-        ## for windows
-        - mongo:/data/db
-        ## for linux
-        # - ${DATA_PATH_HOST}/mongo:/data/db
+        - ${MONGODB_VOLUMES}:/data/db
       networks:
         - backend
 
