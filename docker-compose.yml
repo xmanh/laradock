@@ -47,6 +47,8 @@ volumes:
     driver: ${VOLUMES_DRIVER}
   cassandra:
     driver: ${VOLUMES_DRIVER}
+  asterisk:
+    driver: ${VOLUMES_DRIVER}
 
 services:
 
@@ -1698,3 +1700,21 @@ services:
         - postgres
       volumes:
         - ${DATA_PATH_HOST}/Confluence:/var/atlassian/application-data
+### ASTERISK ################################################
+    asterisk:
+      build:
+        context: ./asterisk
+      hostname: laradock-asterisk
+      volumes:
+        - ${DATA_PATH_HOST}/asterisk/sounds:/var/lib/asterisk/sounds
+        - ${DATA_PATH_HOST}/asterisk/keys:/var/lib/asterisk/keys
+        - ${DATA_PATH_HOST}/asterisk/phoneprov:/var/lib/asterisk/phoneprov
+        - ${DATA_PATH_HOST}/asterisk/spool:/var/spool/asterisk
+        - ${DATA_PATH_HOST}/asterisk/log:/var/log/asterisk
+      expose:
+        - "5060"
+      ports:
+        - ${ASTERISK_PORT}:5060
+      networks:
+        - backend
+        - frontend
